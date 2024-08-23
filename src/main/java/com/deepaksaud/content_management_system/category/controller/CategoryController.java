@@ -21,6 +21,13 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    // MVC: Create a new category
+    @GetMapping("/create")
+    public String createCategoryForm(Model model) {
+        model.addAttribute("category", new Category());
+        return "category-form";
+    }
+
 
     @PostMapping
     public String addCategory(@ModelAttribute("category") Category category){
