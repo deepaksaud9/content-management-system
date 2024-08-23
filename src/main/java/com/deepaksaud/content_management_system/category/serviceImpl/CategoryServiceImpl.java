@@ -31,4 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
     }
 
+    public Category updateCategory(Long id, Category updatedCategory) {
+        Category category = getCategoryById(id);
+        category.setName(updatedCategory.getName());
+        return categoryRepository.save(category);
+    }
+
 }

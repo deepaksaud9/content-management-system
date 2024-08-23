@@ -11,4 +11,6 @@ public interface CategoryService {
     public List<Category> getAllCategories();
 
     public Category getCategoryById(Long id);
+
+    public Category updateCategory(Long id, Category updatedCategory);
 }
