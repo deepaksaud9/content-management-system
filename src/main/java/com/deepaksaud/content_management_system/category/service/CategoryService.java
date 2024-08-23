@@ -13,4 +13,6 @@ public interface CategoryService {
     public Category getCategoryById(Long id);
 
     public Category updateCategory(Long id, Category updatedCategory);
+
+    public void deleteCategory(Long id);
 }

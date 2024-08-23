@@ -55,5 +55,12 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
+    // MVC: Delete a category
+    @GetMapping("/delete/{id}")
+    public String deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+        return "redirect:/categories";
+    }
+
 
 }

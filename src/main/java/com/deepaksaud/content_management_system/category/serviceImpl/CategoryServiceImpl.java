@@ -37,4 +37,8 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.save(category);
     }
 
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
 }
