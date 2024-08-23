@@ -3,6 +3,8 @@ package com.deepaksaud.content_management_system.category.controller;
 import com.deepaksaud.content_management_system.category.model.Category;
 import com.deepaksaud.content_management_system.category.service.CategoryService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +26,13 @@ public class CategoryController {
     public String addCategory(@ModelAttribute("category") Category category){
         categoryService.addCategory(category);
         return "redirect:/categories";
+    }
+
+    // MVC: List categories
+    @GetMapping
+    public String listCategories(Model model) {
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+        return "categories"; // returns categories.html view
     }
 }
