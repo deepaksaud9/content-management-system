@@ -35,4 +35,6 @@ public class CategoryController {
         model.addAttribute("categories", categories);
         return "categories"; // returns categories.html view
     }
+
+
 }
