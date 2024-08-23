@@ -1,4 +1,4 @@
-package com.deepaksaud.blog_management_system.model;
+package com.deepaksaud.blog_management_system.category.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

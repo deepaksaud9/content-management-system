@@ -1,4 +1,4 @@
-package com.deepaksaud.blog_management_system.repository;
+package com.deepaksaud.blog_management_system.category.repository;
 
 import com.deepaksaud.blog_management_system.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
