@@ -1,5 +1,4 @@
 package com.deepaksaud.content_management_system.category.controller;
-
 import com.deepaksaud.content_management_system.category.model.Category;
 import com.deepaksaud.content_management_system.category.service.CategoryService;
 import org.springframework.stereotype.Controller;
