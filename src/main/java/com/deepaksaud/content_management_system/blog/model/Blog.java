@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -20,22 +21,20 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long blogId;
 
-    @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false, length = 5000)
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToMany
     @JoinTable(
-            name = "blog_tags",
-            joinColumns = @JoinColumn(name = "blog_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tag> tags;
+            name = "blog_tag",
+            joinColumns = @JoinColumn(name = "blogId"),
+            inverseJoinColumns = @JoinColumn(name = "tagId")
+    )
+    private Set<Tag> tags;
 
 
 }

@@ -1,13 +1,13 @@
 package com.deepaksaud.content_management_system.category.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.deepaksaud.content_management_system.blog.model.Blog;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,4 +20,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categoryId;
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Blog> blogs;
 }

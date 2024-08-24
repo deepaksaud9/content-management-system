@@ -4,10 +4,9 @@ import com.deepaksaud.content_management_system.category.model.Category;
 import com.deepaksaud.content_management_system.category.repository.CategoryRepository;
 import com.deepaksaud.content_management_system.category.service.CategoryService;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -24,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        return  categoryRepository.findAll();
     }
 
     public Category getCategoryById(Long id) {
