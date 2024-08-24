@@ -51,4 +51,13 @@ public class BlogController {
         model.addAttribute("tags", tagService.getAllTags());
         return "blogs/edit";
     }
+
+    @PostMapping("/update")
+    public String updateBlog(
+            @ModelAttribute Blog blog,
+            @RequestParam Long categoryId,
+            @RequestParam Set<Long> tagIds) {
+        blogService.createBlog(blog, categoryId, tagIds);
+        return "redirect:/blogs";
+    }
 }
