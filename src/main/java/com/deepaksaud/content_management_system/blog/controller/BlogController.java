@@ -43,6 +43,12 @@ public class BlogController {
         return "blogs/create";
     }
 
+    @GetMapping
+    public String listBlogs(Model model) {
+        model.addAttribute("blogs", blogService.getAllBlogs());
+        return "blogs/list";
+    }
+
     @GetMapping("/edit/{id}")
     public String editBlogForm(@PathVariable Long id, Model model) {
         Blog blog = blogService.getBlogById(id).orElseThrow(() -> new IllegalArgumentException("Invalid blog ID:" + id));
@@ -60,4 +66,6 @@ public class BlogController {
         blogService.createBlog(blog, categoryId, tagIds);
         return "redirect:/blogs";
     }
+
+
 }

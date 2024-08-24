@@ -61,5 +61,10 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findById(id);
     }
 
+    @Override
+    public Iterable<Blog> getAllBlogs() {
+        return blogRepository.findAll();
+    }
+
 
 }
