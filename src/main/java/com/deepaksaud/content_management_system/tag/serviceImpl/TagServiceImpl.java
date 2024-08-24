@@ -5,6 +5,8 @@ import com.deepaksaud.content_management_system.tag.repository.TagRepository;
 import com.deepaksaud.content_management_system.tag.service.TagService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TagServiceImpl implements TagService {
 
@@ -18,5 +20,9 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag createTag(Tag tag) {
         return tagRepository.save(tag);
+    }
+
+    public List<Tag> getAllTags() {
+        return tagRepository.findAll();
     }
 }

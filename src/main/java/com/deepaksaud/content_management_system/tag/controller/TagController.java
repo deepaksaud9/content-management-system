@@ -1,5 +1,4 @@
 package com.deepaksaud.content_management_system.tag.controller;
-
 import com.deepaksaud.content_management_system.tag.model.Tag;
 import com.deepaksaud.content_management_system.tag.service.TagService;
 import org.springframework.stereotype.Controller;
@@ -8,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/v1/tag")
@@ -31,6 +32,14 @@ public class TagController {
     public String saveTag(@ModelAttribute("tag") Tag tag) {
         tagService.createTag(tag);
         return "redirect:/tags";
+    }
+
+    // MVC: List tags
+    @GetMapping
+    public String listTags(Model model) {
+        List<Tag> tags = tagService.getAllTags();
+        model.addAttribute("tags", tags);
+        return "tags";
     }
 
 
