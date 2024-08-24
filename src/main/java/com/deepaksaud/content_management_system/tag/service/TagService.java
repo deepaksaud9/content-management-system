@@ -13,4 +13,6 @@ public interface TagService {
     public Tag getTagById(Long id);
 
     public Tag updateTag(Long id, Tag updateTag);
+
+    public void deleteTag(Long id);
 }

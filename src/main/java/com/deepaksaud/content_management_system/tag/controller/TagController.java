@@ -54,5 +54,11 @@ public class TagController {
         return "redirect:/tags";
     }
 
+    // MVC: Delete a tag
+    @GetMapping("/delete/{id}")
+    public String deleteTag(@PathVariable Long id) {
+        tagService.deleteTag(id);
+        return "redirect:/tags";
+    }
 
 }

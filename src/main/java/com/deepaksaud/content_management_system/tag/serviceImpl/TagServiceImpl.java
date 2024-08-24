@@ -35,4 +35,8 @@ public class TagServiceImpl implements TagService {
         tag.setName(updateTag.getName());
         return tagRepository.save(tag);
     }
+
+    public void deleteTag(Long id) {
+        tagRepository.deleteById(id);
+    }
 }
