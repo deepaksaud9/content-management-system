@@ -56,5 +56,10 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.save(blog);
     }
 
+    @Override
+    public Optional<Blog> getBlogById(Long id) {
+        return blogRepository.findById(id);
+    }
+
 
 }
