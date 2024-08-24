@@ -3,6 +3,8 @@ package com.deepaksaud.content_management_system.tag.controller;
 import com.deepaksaud.content_management_system.tag.model.Tag;
 import com.deepaksaud.content_management_system.tag.service.TagService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,13 @@ public class TagController {
 
     public TagController(TagService tagService){
         this.tagService = tagService;
+    }
+
+    // MVC: Create a new tag
+    @GetMapping("/create")
+    public String createTagForm(Model model) {
+        model.addAttribute("tag", new Tag());
+        return "tag-form";
     }
 
     // MVC: Save the new tag
