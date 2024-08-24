@@ -25,4 +25,8 @@ public class TagServiceImpl implements TagService {
     public List<Tag> getAllTags() {
         return tagRepository.findAll();
     }
+
+    public Tag getTagById(Long id) {
+        return tagRepository.findById(id).orElseThrow(() -> new RuntimeException("tag not found"));
+    }
 }

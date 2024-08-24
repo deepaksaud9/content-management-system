@@ -9,4 +9,6 @@ public interface TagService {
     public Tag createTag(Tag tag);
 
     public List<Tag> getAllTags();
+
+    public Tag getTagById(Long id);
 }
