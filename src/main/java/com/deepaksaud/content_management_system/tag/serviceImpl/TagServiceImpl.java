@@ -29,4 +29,10 @@ public class TagServiceImpl implements TagService {
     public Tag getTagById(Long id) {
         return tagRepository.findById(id).orElseThrow(() -> new RuntimeException("tag not found"));
     }
+
+    public Tag updateTag(Long id, Tag updateTag) {
+        Tag tag = getTagById(id);
+        tag.setName(updateTag.getName());
+        return tagRepository.save(tag);
+    }
 }

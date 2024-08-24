@@ -11,4 +11,6 @@ public interface TagService {
     public List<Tag> getAllTags();
 
     public Tag getTagById(Long id);
+
+    public Tag updateTag(Long id, Tag updateTag);
 }
