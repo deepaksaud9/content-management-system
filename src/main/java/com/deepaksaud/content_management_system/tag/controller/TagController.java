@@ -39,6 +39,14 @@ public class TagController {
         return "tags";
     }
 
+    // MVC: Edit a tag
+    @GetMapping("/edit/{id}")
+    public String editTagForm(@PathVariable Long id, Model model) {
+        Tag tag = tagService.getTagById(id);
+        model.addAttribute("tag", tag);
+        return "tag-form";
+    }
+
     // MVC: Update the tag
     @PostMapping("/update/{id}")
     public String updateTag(@PathVariable Long id, @ModelAttribute("tag") Tag tag) {
