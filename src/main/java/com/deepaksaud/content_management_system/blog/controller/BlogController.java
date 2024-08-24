@@ -42,4 +42,13 @@ public class BlogController {
         model.addAttribute("tags", tagService.getAllTags());
         return "blogs/create";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editBlogForm(@PathVariable Long id, Model model) {
+        Blog blog = blogService.getBlogById(id).orElseThrow(() -> new IllegalArgumentException("Invalid blog ID:" + id));
+        model.addAttribute("blog", blog);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("tags", tagService.getAllTags());
+        return "blogs/edit";
+    }
 }
