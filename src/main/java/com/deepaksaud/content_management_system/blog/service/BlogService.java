@@ -12,4 +12,6 @@ public interface BlogService {
     public Optional<Blog> getBlogById(Long id);
 
     public Iterable<Blog> getAllBlogs();
+
+    public void deleteBlog(Long id);
 }
