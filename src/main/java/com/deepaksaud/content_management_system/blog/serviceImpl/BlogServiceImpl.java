@@ -33,6 +33,7 @@ public class BlogServiceImpl implements BlogService {
         if (categoryId == null || tagIds == null) {
             throw new IllegalArgumentException("Category ID and Tag IDs must not be null");
         }
+
         // Set Category
         Optional<Category> categoryOpt = categoryRepository.findById(categoryId);
         if (categoryOpt.isPresent()) {
@@ -51,6 +52,7 @@ public class BlogServiceImpl implements BlogService {
         }
         blog.setTags(tagSet);
 
+        // Save or update blog
         return blogRepository.save(blog);
     }
 
