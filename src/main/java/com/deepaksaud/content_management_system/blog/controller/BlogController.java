@@ -25,28 +25,53 @@ public class BlogController {
         this.tagService = tagService;
     }
 
-
-    @PostMapping
-    public String saveBlog(
-            @ModelAttribute Blog blog,
-            @RequestParam Long categoryId,
-            @RequestParam Set<Long> tagIds) {
-        blogService.createBlog(blog, categoryId, tagIds);
-        return "redirect:/blogs";
-    }
-
     @GetMapping("/create")
     public String createBlogForm(Model model) {
         model.addAttribute("blog", new Blog());
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("tags", tagService.getAllTags());
-        return "blogs/create";
+        return "blogs/blog-form";
     }
+
+    @PostMapping
+    public String saveBlog(
+            @ModelAttribute Blog blog,
+            @RequestParam Long categoryId,
+            @RequestParam(required = false) Set<Long> tagIds,
+            Model model) {
+
+        if (categoryId == null) {
+            model.addAttribute("error", "Category must be selected.");
+            return createBlogForm(model);
+        }
+
+        if (tagIds == null || tagIds.isEmpty()) {
+            model.addAttribute("error", "Please select at least one tag.");
+            return createBlogForm(model);
+        }
+
+        try {
+            blogService.createBlog(blog, categoryId, tagIds);
+            return "redirect:/api/v1/blog";
+        } catch (IllegalArgumentException ex) {
+            model.addAttribute("error", ex.getMessage());
+            return createBlogForm(model);
+        }
+    }
+
 
     @GetMapping
     public String listBlogs(Model model) {
         model.addAttribute("blogs", blogService.getAllBlogs());
-        return "blogs/list";
+        return "blogs/blog-list";
+    }
+
+    @GetMapping("/{id}")
+    public String viewBlogDetails(@PathVariable Long id, Model model) {
+        Blog blog = blogService.getBlogById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid blog ID:" + id));
+        model.addAttribute("blog", blog);
+        return "blogs/blog-details";
     }
 
     @GetMapping("/edit/{id}")
@@ -55,7 +80,7 @@ public class BlogController {
         model.addAttribute("blog", blog);
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("tags", tagService.getAllTags());
-        return "blogs/edit";
+        return "blogs/blog-form";
     }
 
     @PostMapping("/update")
@@ -64,12 +89,12 @@ public class BlogController {
             @RequestParam Long categoryId,
             @RequestParam Set<Long> tagIds) {
         blogService.createBlog(blog, categoryId, tagIds);
-        return "redirect:/blogs";
+        return "redirect:/api/v1/blog";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteBlog(@PathVariable Long id) {
         blogService.deleteBlog(id);
-        return "redirect:/blogs";
+        return "redirect:/api/v1/blog";
     }
 }

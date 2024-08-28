@@ -18,26 +18,24 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    // MVC: Create a new category
     @GetMapping("/create")
     public String createCategoryForm(Model model) {
         model.addAttribute("category", new Category());
-        return "category-form";
+        return "categories/category-form";
     }
 
-
+    // MVC: Create a new category
     @PostMapping
-    public String addCategory(@ModelAttribute("category") Category category){
+    public String addCategory(@ModelAttribute("category") Category category) {
         categoryService.addCategory(category);
-        return "redirect:/categories";
+        return "redirect:/api/v1/category";
     }
 
-    // MVC: List categories
     @GetMapping
     public String listCategories(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "categories"; // returns categories.html view
+        return "categories/categories"; // Ensure this matches the location of categories.html
     }
 
     // MVC: Edit a category
@@ -45,21 +43,21 @@ public class CategoryController {
     public String editCategoryForm(@PathVariable Long id, Model model) {
         Category category = categoryService.getCategoryById(id);
         model.addAttribute("category", category);
-        return "category-form";
+        return "categories/category-form";
     }
 
     // MVC: Update the category
     @PostMapping("/update/{id}")
     public String updateCategory(@PathVariable Long id, @ModelAttribute("category") Category category) {
         categoryService.updateCategory(id, category);
-        return "redirect:/categories";
+        return "redirect:/api/v1/category";
     }
 
     // MVC: Delete a category
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
-        return "redirect:/categories";
+        return "redirect:/api/v1/category";
     }
 
 

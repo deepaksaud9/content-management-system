@@ -21,14 +21,14 @@ public class TagController {
     @GetMapping("/create")
     public String createTagForm(Model model) {
         model.addAttribute("tag", new Tag());
-        return "tag-form";
+        return "tags/tag-form";
     }
 
     // MVC: Save the new tag
     @PostMapping
     public String saveTag(@ModelAttribute("tag") Tag tag) {
         tagService.createTag(tag);
-        return "redirect:/tags";
+        return "redirect:/api/v1/tag";
     }
 
     // MVC: List tags
@@ -36,7 +36,7 @@ public class TagController {
     public String listTags(Model model) {
         List<Tag> tags = tagService.getAllTags();
         model.addAttribute("tags", tags);
-        return "tags";
+        return "tags/tag-list";
     }
 
     // MVC: Edit a tag
@@ -44,21 +44,21 @@ public class TagController {
     public String editTagForm(@PathVariable Long id, Model model) {
         Tag tag = tagService.getTagById(id);
         model.addAttribute("tag", tag);
-        return "tag-form";
+        return "tags/tag-form";
     }
 
     // MVC: Update the tag
     @PostMapping("/update/{id}")
     public String updateTag(@PathVariable Long id, @ModelAttribute("tag") Tag tag) {
         tagService.updateTag(id, tag);
-        return "redirect:/tags";
+        return "redirect:/api/v1/tag";
     }
 
     // MVC: Delete a tag
     @GetMapping("/delete/{id}")
     public String deleteTag(@PathVariable Long id) {
         tagService.deleteTag(id);
-        return "redirect:/tags";
+        return "redirect:/api/v1/tag";
     }
 
 }

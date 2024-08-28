@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${category.categoryId == null ? 'Create Category' : 'Edit Category'}">Category Form</title>
+    <link rel="stylesheet" href="/css/categories/category-form.css" />
+</head>
+<body>
+<header>
+    <!-- Include the navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+</header>
+
+<h1 th:text="${category.categoryId == null ? 'Create Category' : 'Add Category'}"></h1>
+
+<form th:action="@{/api/v1/category}" th:object="${category}" method="post">
+    <input type="hidden" th:field="*{categoryId}" />
+    <label for="name">Name:</label>
+    <input type="text" th:field="*{name}" id="name" />
+    <button type="submit" th:text="${category.categoryId == null ? 'Create' : 'Update'}"></button>
+</form>
+</body>
+</html>

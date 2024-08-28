@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Categories</title>
+    <link rel="stylesheet" href="/css/categories/categories.css">
+</head>
+<body>
+<header>
+    <!-- Include the navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+</header>
+
+<h2>Categories</h2>
+<a href="/api/v1/category/create" class="btn">Create New Category</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.categoryId}"></td>
+        <td th:text="${category.name}"></td>
+        <td>
+            <a th:href="@{/api/v1/category/edit/{id}(id=${category.categoryId})}" class="btn">Edit</a>
+            <a th:href="@{/api/v1/category/delete/{id}(id=${category.categoryId})}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blogs List</title>
+    <link rel="stylesheet" th:href="@{/css/blogs/blog-list.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/blogs/blog-list.css}">-->
+</head>
+<body>
+<header>
+    <!-- Include the navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+</header>
+
+<h1>Blogs</h1>
+<a href="/api/v1/blog/create">Create New Blog</a>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Tags</th>
+        <th>Actions</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.title}"></td>
+        <td th:text="${blog.category.name}"></td>
+        <td>
+            <span th:each="tag : ${blog.tags}" th:text="${tag.name}"> </span>
+        </td>
+        <td>
+            <a th:href="@{/api/v1/blog/edit/{id}(id=${blog.blogId})}">Edit</a>
+            <a th:href="@{/api/v1/blog/delete/{id}(id=${blog.blogId})}" onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+        <td>
+            <a th:href="@{/api/v1/blog/{id}(id=${blog.blogId})}">View Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
