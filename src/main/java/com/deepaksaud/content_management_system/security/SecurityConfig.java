@@ -1,8 +1,8 @@
 package com.deepaksaud.content_management_system.security;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +13,15 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfig {
+
+    @Value("${security.user.name}")
+    private String username;
+
+    @Value("${security.user.password}")
+    private String password;
+
+    @Value("${security.user.roles}")
+    private String roles;
 
 
     @Bean
@@ -28,10 +37,9 @@ public class SecurityConfig {
                         .requestMatchers("/rest/**").authenticated()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(withDefaults()) // Use basic auth for API endpoints
-                .formLogin(withDefaults()) // This enables the default login page
+                .httpBasic(withDefaults())
+                .formLogin(withDefaults())
                 .logout(LogoutConfigurer::permitAll);
-                /*.logout((logout) -> logout.permitAll());*/
 
         return http.build();
     }
@@ -39,9 +47,9 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         var user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
+                .username(username)
+                .password(password)
+                .roles(roles)
                 .build();
 
         return new InMemoryUserDetailsManager(user);
