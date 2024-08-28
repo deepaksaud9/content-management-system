@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Management</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+<header>
+    <!-- Include the navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+</header>
+
+<div class="container">
+    <section>
+        <h1>Welcome to Blog Management</h1>
+        <p>Manage your blog categories, tags, and blog posts with ease.</p>
+        <div class="actions">
+            <a th:href="@{/api/v1/category/create}" class="btn">Create Category</a>
+            <a th:href="@{/api/v1/tag/create}" class="btn">Create Tag</a>
+            <a th:href="@{/api/v1/blog/create}" class="btn">Create Blog</a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2024 Blog Management</p>
+</footer>
+
+<!-- Link to JS -->
+<script th:src="@{/js/scripts.js}"></script>
+</body>
+</html>

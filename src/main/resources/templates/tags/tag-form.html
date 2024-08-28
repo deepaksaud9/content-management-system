@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tag Form</title>
+    <link rel="stylesheet" href="/css/tags/tag-form.css" />
+</head>
+<body>
+<header>
+    <!-- Include the navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+</header>
+
+<div class="container">
+    <h1 th:text="${tag.tagId != null} ? 'Edit Tag' : 'New Tag'"></h1>
+
+    <form th:action="@{/api/v1/tag}" th:object="${tag}" method="post">
+        <input type="hidden" th:field="*{tagId}"/>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" required/>
+
+        <button type="submit">Save</button>
+        <a th:href="@{/api/v1/tag}">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>
