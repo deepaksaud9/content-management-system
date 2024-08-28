@@ -24,9 +24,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/css/**","/css/index.css", "/images/**", "/js/**").permitAll()
                         .requestMatchers("/", "/home","/api/v1/blog").permitAll()
+                        .requestMatchers("/rest/fetchAllBlog").permitAll()
+                        .requestMatchers("/rest/**").authenticated()
                         .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults())  // This enables the default login page
+                .httpBasic(withDefaults()) // Use basic auth for API endpoints
+                .formLogin(withDefaults()) // This enables the default login page
                 .logout(LogoutConfigurer::permitAll);
                 /*.logout((logout) -> logout.permitAll());*/
 

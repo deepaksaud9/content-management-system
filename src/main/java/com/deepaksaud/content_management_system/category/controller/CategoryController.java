@@ -1,6 +1,8 @@
 package com.deepaksaud.content_management_system.category.controller;
 import com.deepaksaud.content_management_system.category.model.Category;
 import com.deepaksaud.content_management_system.category.service.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService){
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -59,6 +61,4 @@ public class CategoryController {
         categoryService.deleteCategory(id);
         return "redirect:/api/v1/category";
     }
-
-
 }
